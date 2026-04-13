@@ -506,6 +506,7 @@ body {
     display: flex;
     gap: 0.75rem;
     margin-top: 1.5rem;
+    justify-content: center;
 }
 
 .quiz-nav .btn-secondary {
@@ -515,6 +516,8 @@ body {
 .quiz-nav .btn-primary {
     flex: 1;
     justify-content: center;
+    max-width: 280px;
+    margin: 0 auto;
 }
 
 /* Animations */
@@ -1008,7 +1011,7 @@ body {
     padding: 2.5rem 2rem;
     border: 2px solid var(--accent-gold);
     box-shadow: 0 4px 24px rgba(212, 168, 83, 0.15);
-    text-align: center;
+    text-align: left;
     position: relative;
     overflow: hidden;
 }
@@ -1028,6 +1031,7 @@ body {
     font-weight: 800;
     margin-bottom: 1rem;
     color: var(--accent-gold);
+    text-align: center;
 }
 
 .cta-card p {
@@ -1037,7 +1041,6 @@ body {
 }
 
 .cta-card ul {
-    text-align: left;
     padding-left: 1.5rem;
     margin-bottom: 1rem;
 }
@@ -1058,7 +1061,6 @@ body {
     border-radius: var(--radius-sm);
     padding: 1.25rem;
     margin-top: 1.25rem;
-    text-align: left;
 }
 
 .cta-heart p {

@@ -76,7 +76,7 @@ const app = {
         const btnNext = document.getElementById('btnNext');
         const btnBack = document.getElementById('btnBack');
 
-        btnBack.style.visibility = this.currentStepIndex === 0 ? 'hidden' : 'visible';
+        btnBack.style.display = this.currentStepIndex === 0 ? 'none' : '';
         this.updateProgress(step);
 
         // ── SECTION INTRO ──
@@ -209,7 +209,7 @@ const app = {
         const btnNext = document.getElementById('btnNext');
         const btnBack = document.getElementById('btnBack');
 
-        btnBack.style.visibility = this.currentStepIndex === 0 ? 'hidden' : 'visible';
+        btnBack.style.display = this.currentStepIndex === 0 ? 'none' : '';
 
         if (step.stepType === 'intro') {
             btnNext.disabled = false;
