@@ -51,11 +51,10 @@ const ScoringEngine = {
 
         // Readiness scoring from Section 8
         const s8q3 = answers['s8q3'] || '';
-        const s8q4 = answers['s8q4'] || '';
         let readiness = 'low';
-        if ((s8q3 === 'C' || s8q3 === 'D') && (s8q4 === 'C' || s8q4 === 'D')) {
+        if (s8q3 === 'D') {
             readiness = 'high';
-        } else if (s8q3 === 'C' || s8q3 === 'D' || s8q4 === 'C' || s8q4 === 'D') {
+        } else if (s8q3 === 'C') {
             readiness = 'medium';
         }
 
@@ -82,8 +81,8 @@ const ScoringEngine = {
 
         return {
             totalScore,
-            maxScore: 120,
-            percentage: Math.round((totalScore / 120) * 100),
+            maxScore: 85,
+            percentage: Math.round((totalScore / 85) * 100),
             category,
             sectionScores,
             strongest: { key: strongest[0], ...strongest[1] },

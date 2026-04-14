@@ -10,13 +10,25 @@ const app = {
         this.allSteps = this.buildSteps();
     },
 
+    shuffleArray(arr) {
+        const shuffled = arr.slice();
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    },
+
     buildSteps() {
         const steps = [];
-        let questionNumber = 0;
         const totalQuestions = quizData.sectionOrder.reduce((sum, key) => sum + quizData.sections[key].questions.length, 0);
+        let overallQuestionNumber = 0;
+        const labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
 
         quizData.sectionOrder.forEach(sectionKey => {
             const section = quizData.sections[sectionKey];
+            const sectionTotalQuestions = section.questions.length;
+            let sectionQuestionNumber = 0;
 
             // Section intro step
             steps.push({
@@ -29,20 +41,35 @@ const app = {
 
             // Question steps
             section.questions.forEach(q => {
-                questionNumber++;
+                overallQuestionNumber++;
+                sectionQuestionNumber++;
+
+                // Shuffle options for scored single-select questions
+                let options = q.options ? q.options.slice() : null;
+                if (options && section.scored && q.type === 'single') {
+                    options = this.shuffleArray(options);
+                    // Reassign labels based on new order
+                    options = options.map((opt, idx) => ({
+                        ...opt,
+                        label: labels[idx]
+                    }));
+                }
+
                 steps.push({
                     stepType: 'question',
-                    qType: q.type,         // 'text', 'single', 'multi'
+                    qType: q.type,
                     id: q.id,
                     text: q.text,
-                    options: q.options || null,
+                    options: options,
                     placeholder: q.placeholder || null,
                     note: q.note || null,
                     sectionKey,
                     sectionTitle: section.title,
                     sectionIcon: section.icon,
-                    questionNumber,
-                    totalQuestions
+                    overallQuestionNumber,
+                    totalQuestions,
+                    sectionQuestionNumber,
+                    sectionTotalQuestions
                 });
             });
         });
@@ -63,8 +90,9 @@ const app = {
 
     updateProgress(step) {
         if (step.stepType === 'question') {
-            document.getElementById('progressFill').style.width = ((step.questionNumber / step.totalQuestions) * 100) + '%';
-            document.getElementById('progressCount').textContent = step.questionNumber + ' of ' + step.totalQuestions;
+            const pct = Math.round((step.overallQuestionNumber / step.totalQuestions) * 100);
+            document.getElementById('progressFill').style.width = pct + '%';
+            document.getElementById('progressCount').textContent = pct + '% Complete';
         }
         document.getElementById('progressSection').textContent = step.sectionIcon + ' ' + step.sectionTitle;
     },
@@ -95,7 +123,7 @@ const app = {
 
         // ── QUESTION ──
         let html = `<div class="question-card ${anim}" id="questionCard">`;
-        html += `<div class="question-number">Question ${step.questionNumber} of ${step.totalQuestions}</div>`;
+        html += `<div class="question-number">Question ${step.sectionQuestionNumber} of ${step.sectionTotalQuestions}</div>`;
         html += `<h2 class="question-text">${step.text}</h2>`;
 
         if (step.note) {
@@ -439,6 +467,7 @@ const app = {
         this.currentStepIndex = 0;
         this.results = null;
         this.direction = 'right';
+        this.allSteps = this.buildSteps(); // Re-shuffle options on retake
         this.showScreen('welcome');
     }
 };

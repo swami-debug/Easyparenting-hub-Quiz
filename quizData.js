@@ -17,7 +17,7 @@ const quizData = {
                 },
                 {
                     id: 's0q2',
-                    text: 'How old is your child / children?',
+                    text: 'What is the age of your eldest child?',
                     type: 'single',
                     options: [
                         { label: 'A', text: '0–2 years', value: 'A' },
@@ -37,28 +37,6 @@ const quizData = {
                         { label: 'C', text: 'Running a business / self-employed', value: 'C' },
                         { label: 'D', text: 'In a transition phase', value: 'D' }
                     ]
-                },
-                {
-                    id: 's0q4',
-                    text: 'On most weekdays, I spend time with my child…',
-                    type: 'single',
-                    options: [
-                        { label: 'A', text: 'Less than 2 hours', value: 'A' },
-                        { label: 'B', text: '2–4 hours', value: 'B' },
-                        { label: 'C', text: '4–6 hours', value: 'C' },
-                        { label: 'D', text: 'More than 6 hours', value: 'D' }
-                    ]
-                },
-                {
-                    id: 's0q5',
-                    text: 'My family setup looks like…',
-                    type: 'single',
-                    options: [
-                        { label: 'A', text: 'Nuclear family', value: 'A' },
-                        { label: 'B', text: 'Joint / extended family', value: 'B' },
-                        { label: 'C', text: 'Single parent', value: 'C' },
-                        { label: 'D', text: 'Other', value: 'D' }
-                    ]
                 }
             ]
         },
@@ -68,7 +46,7 @@ const quizData = {
             subtitle: "Let's begin with your connection with your child… Choose what feels closest to your reality.",
             icon: '💛',
             scored: true,
-            maxScore: 20,
+            maxScore: 15,
             meaning: 'Emotional connection gap',
             questions: [
                 {
@@ -98,19 +76,6 @@ const quizData = {
                     ]
                 },
                 {
-                    id: 's1q3',
-                    text: 'When it comes to expressing love to my child, I am…',
-                    type: 'single',
-                    reverse: false,
-                    options: [
-                        { label: 'A', text: "Someone who rarely expresses it", value: 'A', score: 1 },
-                        { label: 'B', text: "Someone who feels it but doesn't show it much", value: 'B', score: 2 },
-                        { label: 'C', text: 'Someone who expresses it sometimes', value: 'C', score: 3 },
-                        { label: 'D', text: 'Someone who often shows love', value: 'D', score: 4 },
-                        { label: 'E', text: 'Someone whose child deeply feels loved', value: 'E', score: 5 }
-                    ]
-                },
-                {
                     id: 's1q4',
                     text: 'After a difficult moment or conflict with my child, I am…',
                     type: 'single',
@@ -131,7 +96,7 @@ const quizData = {
             subtitle: "Now let's gently look at how you respond in everyday moments… Choose what feels closest to your reality.",
             icon: '🛡️',
             scored: true,
-            maxScore: 20,
+            maxScore: 15,
             meaning: 'Discipline & reaction gap',
             questions: [
                 {
@@ -172,19 +137,6 @@ const quizData = {
                         { label: 'D', text: 'Mostly mindful', value: 'D', score: 2 },
                         { label: 'E', text: 'Thoughtful and composed', value: 'E', score: 1 }
                     ]
-                },
-                {
-                    id: 's2q4',
-                    text: 'After a tough moment with my child, I am…',
-                    type: 'single',
-                    reverse: true,
-                    options: [
-                        { label: 'A', text: 'Carrying guilt without clarity', value: 'A', score: 5 },
-                        { label: 'B', text: 'Often wishing I had done better', value: 'B', score: 4 },
-                        { label: 'C', text: 'Reflecting sometimes', value: 'C', score: 3 },
-                        { label: 'D', text: 'Learning and improving', value: 'D', score: 2 },
-                        { label: 'E', text: 'Growing with awareness and repair', value: 'E', score: 1 }
-                    ]
                 }
             ]
         },
@@ -194,7 +146,7 @@ const quizData = {
             subtitle: "Now let's pause and look at you… not just your child. Choose what feels closest to your reality.",
             icon: '🧘',
             scored: true,
-            maxScore: 20,
+            maxScore: 15,
             meaning: 'Emotional burnout / self gap',
             questions: [
                 {
@@ -224,19 +176,6 @@ const quizData = {
                     ]
                 },
                 {
-                    id: 's3q3',
-                    text: 'In my parenting journey, I feel…',
-                    type: 'single',
-                    reverse: false,
-                    options: [
-                        { label: 'A', text: 'Completely alone', value: 'A', score: 1 },
-                        { label: 'B', text: 'Mostly unsupported', value: 'B', score: 2 },
-                        { label: 'C', text: 'Sometimes supported', value: 'C', score: 3 },
-                        { label: 'D', text: 'Supported in many ways', value: 'D', score: 4 },
-                        { label: 'E', text: 'Deeply supported and guided', value: 'E', score: 5 }
-                    ]
-                },
-                {
                     id: 's3q4',
                     text: 'By the end of most days, I am…',
                     type: 'single',
@@ -257,7 +196,7 @@ const quizData = {
             subtitle: "Now let's look at how you and your child communicate with each other… Choose what feels closest to your reality.",
             icon: '💬',
             scored: true,
-            maxScore: 15,
+            maxScore: 10,
             meaning: 'Communication gap',
             questions: [
                 {
@@ -285,19 +224,6 @@ const quizData = {
                         { label: 'D', text: 'Mostly accepting', value: 'D', score: 4 },
                         { label: 'E', text: 'Holding space with calm and understanding', value: 'E', score: 5 }
                     ]
-                },
-                {
-                    id: 's4q3',
-                    text: 'When my child has a different opinion from me, I am…',
-                    type: 'single',
-                    reverse: false,
-                    options: [
-                        { label: 'A', text: 'Not open to it', value: 'A', score: 1 },
-                        { label: 'B', text: 'Feeling challenged', value: 'B', score: 2 },
-                        { label: 'C', text: 'Allowing sometimes', value: 'C', score: 3 },
-                        { label: 'D', text: 'Mostly open', value: 'D', score: 4 },
-                        { label: 'E', text: 'Creating a safe space for respectful disagreement', value: 'E', score: 5 }
-                    ]
                 }
             ]
         },
@@ -307,7 +233,7 @@ const quizData = {
             subtitle: "Now let's look at the environment your child is growing up in… Choose what feels closest to your reality.",
             icon: '🏠',
             scored: true,
-            maxScore: 15,
+            maxScore: 10,
             meaning: 'Environment / structure gap',
             questions: [
                 {
@@ -321,19 +247,6 @@ const quizData = {
                         { label: 'C', text: 'A mix of calm and stress', value: 'C', score: 3 },
                         { label: 'D', text: 'Mostly calm', value: 'D', score: 4 },
                         { label: 'E', text: 'Peaceful and nurturing', value: 'E', score: 5 }
-                    ]
-                },
-                {
-                    id: 's5q2',
-                    text: 'When it comes to daily routines in my home, I am…',
-                    type: 'single',
-                    reverse: false,
-                    options: [
-                        { label: 'A', text: 'Living day-to-day without structure', value: 'A', score: 1 },
-                        { label: 'B', text: 'Trying but inconsistent', value: 'B', score: 2 },
-                        { label: 'C', text: 'Following routines sometimes', value: 'C', score: 3 },
-                        { label: 'D', text: 'Mostly consistent', value: 'D', score: 4 },
-                        { label: 'E', text: 'Creating predictable, comforting rhythms', value: 'E', score: 5 }
                     ]
                 },
                 {
@@ -357,7 +270,7 @@ const quizData = {
             subtitle: "Now let's look at the values and deeper foundations you are building for your child… Choose what feels closest to your reality.",
             icon: '🌿',
             scored: true,
-            maxScore: 15,
+            maxScore: 10,
             meaning: 'Values / depth gap',
             questions: [
                 {
@@ -385,19 +298,6 @@ const quizData = {
                         { label: 'D', text: 'Teaching through daily moments', value: 'D', score: 4 },
                         { label: 'E', text: 'Living and reinforcing these values consistently', value: 'E', score: 5 }
                     ]
-                },
-                {
-                    id: 's6q3',
-                    text: 'When it comes to modelling the values I want my child to learn, I am…',
-                    type: 'single',
-                    reverse: false,
-                    options: [
-                        { label: 'A', text: 'Struggling to live them', value: 'A', score: 1 },
-                        { label: 'B', text: 'Aware but inconsistent', value: 'B', score: 2 },
-                        { label: 'C', text: 'Practising sometimes', value: 'C', score: 3 },
-                        { label: 'D', text: 'Mostly aligned', value: 'D', score: 4 },
-                        { label: 'E', text: 'Leading by example with awareness', value: 'E', score: 5 }
-                    ]
                 }
             ]
         },
@@ -407,7 +307,7 @@ const quizData = {
             subtitle: "Now let's look at the support you have around you… Choose what feels closest to your reality.",
             icon: '🤝',
             scored: true,
-            maxScore: 15,
+            maxScore: 10,
             meaning: 'Support system gap',
             questions: [
                 {
@@ -434,19 +334,6 @@ const quizData = {
                         { label: 'C', text: 'Reaching out sometimes', value: 'C', score: 3 },
                         { label: 'D', text: 'Asking for support when needed', value: 'D', score: 4 },
                         { label: 'E', text: 'Openly supported and held', value: 'E', score: 5 }
-                    ]
-                },
-                {
-                    id: 's7q3',
-                    text: 'When I think about support in my life, I am…',
-                    type: 'single',
-                    reverse: true,
-                    options: [
-                        { label: 'A', text: 'Feeling completely alone', value: 'A', score: 5 },
-                        { label: 'B', text: 'Lacking true support', value: 'B', score: 4 },
-                        { label: 'C', text: 'Having some support', value: 'C', score: 3 },
-                        { label: 'D', text: 'Supported in many ways', value: 'D', score: 2 },
-                        { label: 'E', text: 'Deeply understood and supported', value: 'E', score: 1 }
                     ]
                 }
             ]
@@ -502,38 +389,16 @@ const quizData = {
                         { label: 'C', text: 'Ready, but I need support', value: 'C' },
                         { label: 'D', text: 'Fully ready to begin now', value: 'D' }
                     ]
-                },
-                {
-                    id: 's8q4',
-                    text: 'When it comes to investing in my growth as a mother, I am…',
-                    type: 'single',
-                    options: [
-                        { label: 'A', text: 'Taking small steps for now', value: 'A' },
-                        { label: 'B', text: 'Open to investing, but still exploring', value: 'B' },
-                        { label: 'C', text: 'Ready to invest in real change — I know my growth matters', value: 'C' },
-                        { label: 'D', text: 'Fully ready to invest in lasting transformation — my child and family deserve this', value: 'D' }
-                    ]
-                },
-                {
-                    id: 's8q5',
-                    text: "When I think about how much I invest monthly in my child's education, activities and toys, it is…",
-                    type: 'single',
-                    options: [
-                        { label: 'A', text: '\u20B90 – \u20B95,000', value: 'A' },
-                        { label: 'B', text: '\u20B95,001 – \u20B910,000', value: 'B' },
-                        { label: 'C', text: '\u20B910,001 – \u20B915,000', value: 'C' },
-                        { label: 'D', text: 'Above \u20B915,000', value: 'D' }
-                    ]
                 }
             ]
         }
     },
 
     categories: [
-        { id: 'survival', name: 'Survival Mode Mother', range: [0, 50], description: "Right now, you are in a phase where you are doing your best… but it often feels overwhelming, exhausting, and emotionally heavy. There is so much love in you… but very little support and space to hold everything you are carrying." },
-        { id: 'aware', name: 'Aware but Struggling Mother', range: [51, 80], description: "You already understand so much about what your child needs. But somewhere between daily life, responsibilities, and emotional overwhelm… it becomes hard to stay consistent. You try, you reflect… and sometimes you feel guilty." },
-        { id: 'conscious', name: 'Conscious Growing Mother', range: [81, 105], description: "You are already a conscious and aware mother. You pause, reflect, and genuinely want to grow. You are not stuck — you are evolving. And with the right guidance, you can create deep transformation." },
-        { id: 'aligned', name: 'Aligned & Evolving Mother', range: [106, 120], description: "You have built a strong foundation of awareness and connection. You are already parenting with intention. Now, your journey is about deepening, refining, and expanding that awareness." }
+        { id: 'survival', name: 'Survival Mode Mother', range: [0, 35], description: "Right now, you are in a phase where you are doing your best… but it often feels overwhelming, exhausting, and emotionally heavy. There is so much love in you… but very little support and space to hold everything you are carrying." },
+        { id: 'aware', name: 'Aware but Struggling Mother', range: [36, 57], description: "You already understand so much about what your child needs. But somewhere between daily life, responsibilities, and emotional overwhelm… it becomes hard to stay consistent. You try, you reflect… and sometimes you feel guilty." },
+        { id: 'conscious', name: 'Conscious Growing Mother', range: [58, 74], description: "You are already a conscious and aware mother. You pause, reflect, and genuinely want to grow. You are not stuck — you are evolving. And with the right guidance, you can create deep transformation." },
+        { id: 'aligned', name: 'Aligned & Evolving Mother', range: [75, 85], description: "You have built a strong foundation of awareness and connection. You are already parenting with intention. Now, your journey is about deepening, refining, and expanding that awareness." }
     ],
 
     sectionLabels: {
