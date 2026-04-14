@@ -161,6 +161,7 @@ body {
 .welcome-logo {
     max-width: 220px;
     height: auto;
+    border-radius: 50%;
 }
 
 @keyframes floating {
