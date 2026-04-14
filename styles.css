@@ -150,7 +150,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: floating 4s ease-in-out infinite;
     box-shadow: 0 20px 60px rgba(77, 184, 154, 0.15);
 }
 
