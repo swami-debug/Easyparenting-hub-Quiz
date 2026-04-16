@@ -387,14 +387,26 @@ const app = {
         this.showScreen('results');
     },
 
+    getOptionText(questionId, value) {
+        for (const sectionKey of quizData.sectionOrder) {
+            const section = quizData.sections[sectionKey];
+            const question = section.questions.find(q => q.id === questionId);
+            if (question && question.options) {
+                const opt = question.options.find(o => o.value === value);
+                if (opt) return opt.text;
+            }
+        }
+        return value;
+    },
+
     sendToGHL() {
         const r = this.results;
         const payload = {
             name: r.userName,
             email: this.answers._email || '',
             phone: this.answers._phone || '',
-            childAge: this.answers['s0q2'] || '',
-            parentStatus: this.answers['s0q3'] || '',
+            childAge: this.getOptionText('s0q2', this.answers['s0q2'] || ''),
+            parentStatus: this.getOptionText('s0q3', this.answers['s0q3'] || ''),
             totalScore: r.totalScore,
             maxScore: r.maxScore,
             scorePercentage: r.percentage,
