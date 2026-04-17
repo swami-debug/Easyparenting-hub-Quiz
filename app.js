@@ -30,15 +30,6 @@ const app = {
             const sectionTotalQuestions = section.questions.length;
             let sectionQuestionNumber = 0;
 
-            // Section intro step
-            steps.push({
-                stepType: 'intro',
-                sectionKey,
-                sectionTitle: section.title,
-                sectionSubtitle: section.subtitle,
-                sectionIcon: section.icon
-            });
-
             // Question steps
             section.questions.forEach(q => {
                 overallQuestionNumber++;
@@ -106,20 +97,6 @@ const app = {
 
         btnBack.style.display = this.currentStepIndex === 0 ? 'none' : '';
         this.updateProgress(step);
-
-        // ── SECTION INTRO ──
-        if (step.stepType === 'intro') {
-            container.innerHTML = `
-                <div class="section-intro ${anim}">
-                    <span class="section-icon">${step.sectionIcon}</span>
-                    <span class="section-tag">${step.sectionKey === 'section0' ? 'Section 0' : step.sectionKey.replace('section', 'Section ')}</span>
-                    <h2>${step.sectionTitle}</h2>
-                    <p>${step.sectionSubtitle}</p>
-                </div>`;
-            btnNext.disabled = false;
-            btnNext.innerHTML = "Let's Begin &#8594;";
-            return;
-        }
 
         // ── QUESTION ──
         let html = `<div class="question-card ${anim}" id="questionCard">`;
@@ -239,21 +216,27 @@ const app = {
 
         btnBack.style.display = this.currentStepIndex === 0 ? 'none' : '';
 
-        if (step.stepType === 'intro') {
-            btnNext.disabled = false;
-            btnNext.innerHTML = "Let's Begin &#8594;";
-            return;
-        }
-
         const answer = this.answers[step.id];
         let hasAnswer = false;
         if (step.qType === 'text') hasAnswer = answer && answer.trim().length > 0;
         else if (step.qType === 'multi') hasAnswer = Array.isArray(answer) && answer.length > 0;
         else hasAnswer = !!answer;
 
-        btnNext.disabled = !hasAnswer;
-        const isLast = this.currentStepIndex === this.allSteps.length - 1;
-        btnNext.innerHTML = isLast ? 'See My Results &#10148;' : 'Next &#8594;';
+        // Hide Next for single-select (auto-advances on click)
+        if (step.qType === 'single') {
+            btnNext.style.display = 'none';
+        } else {
+            btnNext.style.display = '';
+            btnNext.disabled = !hasAnswer;
+            const isLast = this.currentStepIndex === this.allSteps.length - 1;
+            btnNext.innerHTML = isLast ? 'See My Results &#10148;' : 'Next &#8594;';
+        }
+
+        // Center nav when only one button is visible
+        const nav = document.querySelector('.quiz-nav');
+        const backVisible = btnBack.style.display !== 'none';
+        const nextVisible = btnNext.style.display !== 'none';
+        nav.style.justifyContent = (backVisible && nextVisible) ? 'space-between' : 'center';
     },
 
     nextStep() {
@@ -310,8 +293,10 @@ const app = {
         const btnBack = document.getElementById('btnBack');
 
         btnBack.style.display = '';
+        btnNext.style.display = '';
         btnNext.innerHTML = 'See My Results &#10148;';
         btnNext.disabled = true;
+        document.querySelector('.quiz-nav').style.justifyContent = 'space-between';
 
         // Update progress to 100%
         document.getElementById('progressFill').style.width = '100%';
