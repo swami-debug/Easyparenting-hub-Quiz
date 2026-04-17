@@ -81,7 +81,7 @@ const ScoringEngine = {
 
         return {
             totalScore,
-            maxScore: 85,
+            maxScore: 100,
             percentage: Math.round((totalScore / 85) * 100),
             category,
             sectionScores,

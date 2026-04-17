@@ -587,7 +587,7 @@ const app = {
                         <p><em>A Small Request From My Heart</em></p>
                         <p>When you come… come with openness. And please stay till the end. Because what I will share towards the end… can truly help you give your child what they deserve — and help you become the calm, confident mother you already want to be.</p>
                     </div>
-                    <button class="btn btn-cta" onclick="window.open('https://www.riddhideorah.in/webinar-n', '_blank')">Join the Live Masterclass</button>
+                    <button class="btn btn-cta" onclick="app.openMasterclassModal()">Join the Live Masterclass</button>
                 </div>
             </div>
 
@@ -595,6 +595,183 @@ const app = {
                 <button class="btn btn-secondary" onclick="app.restart()">&#8634; Retake Quiz</button>
             </div>
         `;
+    },
+
+    openMasterclassModal() {
+        const name = this.results ? this.results.userName : '';
+        const modal = document.createElement('div');
+        modal.className = 'mc-modal-overlay';
+        modal.id = 'masterclassModal';
+        modal.innerHTML = `
+            <div class="mc-modal">
+                <button class="mc-modal-close" onclick="app.closeMasterclassModal()">&times;</button>
+                <div id="mcModalContent">
+                    ${this._renderSignupState(name)}
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        requestAnimationFrame(() => modal.classList.add('active'));
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) app.closeMasterclassModal();
+        });
+    },
+
+    _renderSignupState(name) {
+        return `
+            <div class="mc-signup-state">
+                <div class="mc-icon">&#127891;</div>
+                <h2>Sign Me Up for the Live Masterclass</h2>
+                <div class="mc-details">
+                    <div class="mc-detail-row">
+                        <span class="mc-detail-icon">&#128197;</span>
+                        <div>
+                            <strong>Date:</strong> Every Saturday
+                        </div>
+                    </div>
+                    <div class="mc-detail-row">
+                        <span class="mc-detail-icon">&#128336;</span>
+                        <div>
+                            <strong>Time:</strong> 11:00 AM IST
+                        </div>
+                    </div>
+                    <div class="mc-detail-row">
+                        <span class="mc-detail-icon">&#128178;</span>
+                        <div>
+                            <strong>Fee:</strong> Completely FREE
+                        </div>
+                    </div>
+                </div>
+                <p class="mc-note">You're signing up as <strong>${name}</strong>. No need to fill any forms again!</p>
+                <button class="btn btn-cta mc-signup-btn" onclick="app.signUpForMasterclass()">Sign Me Up</button>
+                <button class="btn btn-link mc-details-link" onclick="app.showMasterclassDetails()">See More Details</button>
+            </div>
+        `;
+    },
+
+    _renderSuccessState(name) {
+        return `
+            <div class="mc-success-state">
+                <div class="mc-success-icon">&#9989;</div>
+                <h2>You're Successfully Signed Up!</h2>
+                <p>Congratulations, <strong>${name}</strong>! You've taken a beautiful step for yourself and your child.</p>
+                <div class="mc-whatsapp-box">
+                    <div class="mc-whatsapp-icon">&#128172;</div>
+                    <h3>Join Our WhatsApp Community</h3>
+                    <p>Connect with other mothers who are on the same journey. Share, learn, and grow together.</p>
+                    <a href="https://chat.whatsapp.com/YOUR_GROUP_LINK" target="_blank" class="btn mc-whatsapp-btn">
+                        Join the Community
+                    </a>
+                </div>
+                <button class="btn btn-link mc-details-link" onclick="app.showMasterclassDetails()">See More Details About the Masterclass</button>
+                <button class="btn btn-link mc-close-link" onclick="app.closeMasterclassModal()">Close</button>
+            </div>
+        `;
+    },
+
+    _renderDetailsState() {
+        return `
+            <div class="mc-details-state">
+                <button class="mc-back-link" onclick="app.goBackInModal()">&#8592; Back</button>
+                <div class="mc-icon">&#127891;</div>
+                <h2>What You'll Learn in the Live Masterclass</h2>
+                <div class="mc-learn-list">
+                    <div class="mc-learn-item">
+                        <span class="mc-learn-icon">&#128155;</span>
+                        <div>
+                            <strong>Stay Calm Instead of Reacting</strong>
+                            <p>Learn practical techniques to manage your triggers and respond with patience — even on hard days.</p>
+                        </div>
+                    </div>
+                    <div class="mc-learn-item">
+                        <span class="mc-learn-icon">&#129309;</span>
+                        <div>
+                            <strong>Build a Deeper Connection with Your Child</strong>
+                            <p>Discover how to truly understand what your child needs and create a bond built on trust and love.</p>
+                        </div>
+                    </div>
+                    <div class="mc-learn-item">
+                        <span class="mc-learn-icon">&#127968;</span>
+                        <div>
+                            <strong>Create a Peaceful, Structured Home</strong>
+                            <p>Simple routines and strategies that bring calm and cooperation into your daily life.</p>
+                        </div>
+                    </div>
+                    <div class="mc-learn-item">
+                        <span class="mc-learn-icon">&#127775;</span>
+                        <div>
+                            <strong>Become the Confident Mother You Want to Be</strong>
+                            <p>Release guilt and step into your parenting with clarity, strength, and joy.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mc-host-box">
+                    <h3>Hosted by Riddhi Deorah</h3>
+                    <p>Parenting coach and founder of EasyParenting Hub, helping thousands of mothers transform their parenting journey.</p>
+                </div>
+            </div>
+        `;
+    },
+
+    signUpForMasterclass() {
+        const btn = document.querySelector('.mc-signup-btn');
+        btn.disabled = true;
+        btn.textContent = 'Signing you up...';
+
+        const r = this.results;
+        const payload = {
+            name: r.userName,
+            email: this.answers._email || '',
+            phone: this.answers._phone || '',
+            source: 'quiz_masterclass_signup',
+            category: r.category.name,
+            totalScore: r.totalScore,
+            readiness: r.readiness
+        };
+
+        fetch('https://services.leadconnectorhq.com/hooks/ajGJHXmpR6eGMS0oB59e/webhook-trigger/e30eb87b-512a-40b4-baed-0177d535f071', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        }).then(() => {
+            this._showModalSuccess();
+        }).catch(() => {
+            // Still show success — don't block the user
+            this._showModalSuccess();
+        });
+    },
+
+    _showModalSuccess() {
+        const name = this.results ? this.results.userName : '';
+        const content = document.getElementById('mcModalContent');
+        content.innerHTML = this._renderSuccessState(name);
+        this._modalPreviousState = 'success';
+    },
+
+    _modalPreviousState: 'signup',
+
+    showMasterclassDetails() {
+        const content = document.getElementById('mcModalContent');
+        this._modalPreviousState = content.querySelector('.mc-success-state') ? 'success' : 'signup';
+        content.innerHTML = this._renderDetailsState();
+    },
+
+    goBackInModal() {
+        const content = document.getElementById('mcModalContent');
+        const name = this.results ? this.results.userName : '';
+        if (this._modalPreviousState === 'success') {
+            content.innerHTML = this._renderSuccessState(name);
+        } else {
+            content.innerHTML = this._renderSignupState(name);
+        }
+    },
+
+    closeMasterclassModal() {
+        const modal = document.getElementById('masterclassModal');
+        if (modal) {
+            modal.classList.remove('active');
+            setTimeout(() => modal.remove(), 300);
+        }
     },
 
     restart() {
