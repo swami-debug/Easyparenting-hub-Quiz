@@ -95,7 +95,7 @@ const app = {
         const btnNext = document.getElementById('btnNext');
         const btnBack = document.getElementById('btnBack');
 
-        btnBack.style.display = this.currentStepIndex === 0 ? 'none' : '';
+        btnBack.style.display = '';
         this.updateProgress(step);
 
         // ── QUESTION ──
@@ -239,7 +239,7 @@ const app = {
         const btnNext = document.getElementById('btnNext');
         const btnBack = document.getElementById('btnBack');
 
-        btnBack.style.display = this.currentStepIndex === 0 ? 'none' : '';
+        btnBack.style.display = '';
 
         const answer = this.answers[step.id];
         let hasAnswer = false;
@@ -257,11 +257,8 @@ const app = {
             btnNext.innerHTML = isLast ? 'See My Results &#10148;' : 'Next &#8594;';
         }
 
-        // Center nav when only one button is visible
-        const nav = document.querySelector('.quiz-nav');
-        const backVisible = btnBack.style.display !== 'none';
-        const nextVisible = btnNext.style.display !== 'none';
-        nav.style.justifyContent = (backVisible && nextVisible) ? 'space-between' : 'center';
+        // Keep Back pinned to the left on every question
+        document.querySelector('.quiz-nav').style.justifyContent = 'space-between';
     },
 
     nextStep() {
@@ -309,6 +306,8 @@ const app = {
             this.direction = 'left';
             this.currentStepIndex--;
             this.renderStep();
+        } else {
+            this.showScreen('welcome');
         }
     },
 
